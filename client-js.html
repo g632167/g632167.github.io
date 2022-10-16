@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>client-js.html</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ClientJS/0.2.1/client.min.js"></script>
+  </head>
+  <body class="bg-gray-900 flex justify-center items-center h-full">
+    <div class="flex flex-col items-center gap-2">
+      <h1 class="text-lg font-medium text-white">client-js.html</h1>
+      <span class="text-white" id="fingerprint"></span>
+      <span class="hidden" id="raw-fingerprint"></span>
+    </div>
+
+    <script>
+      const fingerprint = document.getElementById("fingerprint");
+      const rawFingerprint = document.getElementById("raw-fingerprint");
+
+      const ClientJS = window.ClientJS;
+      const client = new ClientJS();
+
+      setInterval(() => {
+        fingerprint.innerText = client.getFingerprint();
+
+        // https://github.com/jackspirou/clientjs/blob/master/src/client.base.js#L166
+        var bar = "|";
+        var userAgent = client.getUserAgent();
+        var screenPrint = client.getScreenPrint();
+        var pluginList = client.getPlugins();
+        var fontList = client.getFonts();
+        var localStorage = client.isLocalStorage();
+        var sessionStorage = client.isSessionStorage();
+        var timeZone = client.getTimeZone();
+        var language = client.getLanguage();
+        var systemLanguage = client.getSystemLanguage();
+        var cookies = client.isCookie();
+        var canvasPrint = client.getCanvasPrint();
+        var key =
+          userAgent +
+          bar +
+          screenPrint +
+          bar +
+          pluginList +
+          bar +
+          fontList +
+          bar +
+          localStorage +
+          bar +
+          sessionStorage +
+          bar +
+          timeZone +
+          bar +
+          language +
+          bar +
+          systemLanguage +
+          bar +
+          cookies +
+          bar +
+          canvasPrint;
+
+        rawFingerprint.innerText = key;
+      }, 1000);
+    </script>
+  </body>
+</html>
