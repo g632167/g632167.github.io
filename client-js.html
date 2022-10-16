@@ -22,7 +22,7 @@
       const ClientJS = window.ClientJS;
       const client = new ClientJS();
 
-      setInterval(() => {
+      const setFingerprint = () => {
         fingerprint.innerText = client.getFingerprint();
 
         // https://github.com/jackspirou/clientjs/blob/master/src/client.base.js#L166
@@ -62,7 +62,10 @@
           canvasPrint;
 
         rawFingerprint.innerText = key;
-      }, 1000);
+      };
+
+      setFingerprint();
+      setInterval(setFingerprint, 1000);
     </script>
   </body>
 </html>
